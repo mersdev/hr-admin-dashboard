@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
+    <title id="title">Attendance List</title>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="view.js" defer></script>
+    <script src="../component/sidebar.js"></script>
+    <link rel="shortcut icon" href="../asset/logo.png" type="image/x-icon" />
+  </head>
+  <body>
+    <side-bar></side-bar>
+    <div class="content pb-2 pt-5 mx-2 container-fluid">
+      <div class="d-flex">
+        <div class="content-title">
+          <h2 class="content-main-title fw-bold">Training Events</h2>
+          <p class="content-sub-title text-muted mx-1 mnt-1">
+            Training Event Master List
+          </p>
+        </div>
+        <ion-icon
+          name="calendar-outline"
+          class="ms-auto"
+          style="font-size: 50px"
+        ></ion-icon>
+      </div>
+
+      <div class="analysis-view rounded-4 border p-4 mb-3">
+        <h4 class="fw-bold">Data Analysis</h4>
+        <div class="row">
+          <div class="col-6">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Group</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody class="emp-group-table"></tbody>
+            </table>
+          </div>
+          <div class="col-6">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Employee Category</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody class="emp-cat-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-view border rounded-4 p-4">
+        <div class="d-flex mb-2">
+          <h4 class="fw-bold">Table View</h4>
+          <a href="/event" class="btn btn-primary ms-auto"
+            >Back to Event List</a
+          >
+        </div>
+
+        <div class="input-group w-100">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+          />
+          <span
+            class="input-group-text border-0"
+            id="search-addon"
+            style="background-color: #060654; color: white"
+          >
+            <ion-icon name="search-outline"></ion-icon>
+          </span>
+        </div>
+
+        <div class="d-flex my-2">
+          <button class="btn btn-outline-primary me-2">Current Week</button>
+          <button class="btn btn-outline-primary me-2">Last Week</button>
+
+          <div class="ms-auto">
+            <button class="btn btn-outline-primary">Upcoming Week</button>
+          </div>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Emp No</th>
+              <th>Employee's Name</th>
+              <th>Employee Category</th>
+              <th>Group</th>
+              <th>Total Hours</th>
+            </tr>
+          </thead>
+          <tbody class="data-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

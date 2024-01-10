@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* ==== Colors ==== */
+  --body-color: #f6f6f6;
+  --sidebar-color: #e0ebef;
+  --primary-color: #060654;
+  --primary-color-light: #e0ebef;
+  --text-color: #707070;
+
+  /* ==== Transition ==== */
+  --tran-01: all 0.2s ease;
+  --tran-02: all 0.3s ease;
+  --tran-03: all 0.4s ease;
+  --tran-04: all 0.5s ease;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  color: #060654;
+}
+
+.content {
+  overflow-y: scroll;
+}
+
+.active {
+  background-color: #060654 !important;
+  color: #e0ebef !important;
+}
+
+.mnt-1 {
+  margin-top: -10px;
+}
+
+.btn-primary {
+  color: #fefefe;
+  background-color: #060654;
+  border-color: #373776;
+}
+
+.btn-primary:hover {
+  color: #fefefe;
+  background-color: #04043a;
+  border-color: #04043a;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  box-shadow: 0 0 0 0 rgba(91, 194, 194, 0.5);
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+  color: #fefefe;
+  background-color: #373776;
+  border-color: #04043a;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fefefe;
+  background-color: #373776;
+  border-color: #04043a;
+}
+
+.btn-outline-primary {
+  color: #060654;
+  background-color: transparent;
+  background-image: none;
+  border-color: #060654;
+}
+
+.btn-outline-primary:hover {
+  color: #fefefe;
+  background-color: #060654;
+  border-color: #060654;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary.focus {
+  box-shadow: 0 0 0 0 rgba(36, 4, 244, 0.381);
+}
+
+.btn-outline-primary.disabled,
+.btn-outline-primary:disabled {
+  color: #060654;
+  background-color: transparent;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-primary.dropdown-toggle {
+  color: #fefefe;
+  background-color: #04043a;
+  border-color: #04043a;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus,
+.btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0rem rgba(36, 4, 244, 0.381);
+}
+
+.table th {
+  background-color: #060654 !important;
+  color: #fefefe;
+}
+
+.form-control::-webkit-file-upload-button {
+  background-color: #060654 !important;
+  color: #fefefe;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

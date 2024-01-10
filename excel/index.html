@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <title>Excel to HTML Table</title>
+  </head>
+  <body>
+    <h1>Upload Excel File to display in HTML table</h1>
+    <input type="file" name="excel" />
+    <button class="btn btn-primary upload">Upload</button>
+    <div class="container-fluid">
+      <table class="table table-bordered text-nowrap">
+        <thead>
+          <th>File Code</th>
+          <th>Training Title</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Participants</th>
+          <th>Actions</th>
+        </thead>
+        <tbody class="data-table"></tbody>
+      </table>
+    </div>
+  </body>
+  <script>
+    document.getElementsByClassName("upload")[0].onclick = () => {
+      let file = document.getElementsByName("excel")[0].files;
+      if (file.length == 0) {
+        alert("No file is found!");
+        return;
+      }
+      let filename = file[0].name;
+      var extension = filename
+        .substring(filename.lastIndexOf("."))
+        .toUpperCase();
+      if (extension == ".XLS" || extension == ".XLSX") {
+        //Here calling another method to read excel file into json
+        excelFileToJSON(file[0]);
+      } else {
+        alert("Please select a valid excel file.");
+      }
+    };
+
+    function excelFileToJSON(file) {
+      try {
+        var reader = new FileReader();
+        reader.readAsBinaryString(file);
+        reader.onload = function (e) {
+          var data = e.target.result;
+          var workbook = XLSX.read(data, {
+            type: "binary",
+          });
+          var result = {};
+          var firstSheetName = workbook.SheetNames[0];
+          //reading only first sheet data
+          var data = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName]);
+          let processData = createEventMasterListData(data);
+          createTable(processData);
+        };
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    function createEventMasterListData(data) {
+      let uniqueData = [...new Set(data.map((item) => item["File Code"]))]
+        .map((fileCode) => data.find((item) => item["File Code"] === fileCode))
+        .slice(1);
+
+      const uniqueTitleCounts = data.reduce((acc, item) => {
+        const title = item["Training Title"]; // Extract Training Title
+        acc[title] = (acc[title] || 0) + 1; // Count occurrences
+        return acc;
+      }, {});
+
+      let processDataList = [];
+
+      uniqueData.forEach((unique) => {
+        let processData = {};
+        processData["Training Title"] = unique["Training Title"];
+        processData["File Code"] = unique["File Code"];
+        processData["Start Date"] = unique["Start Date"];
+        processData["End Date"] = unique["End Date"];
+        processData["freq"] = uniqueTitleCounts[unique["Training Title"]];
+        processDataList.push(processData);
+      });
+
+      console.log(processDataList);
+      return processDataList;
+    }
+
+    function createTable(data) {
+      let table = document.getElementsByClassName("data-table")[0];
+      let map = new Map();
+      let total = 0;
+      data.forEach((record) => {
+        let row = document.createElement("tr");
+
+        let file_code = document.createElement("td");
+        file_code.innerHTML = record["File Code"];
+        row.appendChild(file_code);
+
+        let training_title = document.createElement("td");
+        training_title.innerHTML = record["Training Title"];
+        training_title.className = "text-wrap";
+        row.appendChild(training_title);
+
+        let start_date = document.createElement("td");
+        start_date.innerHTML = record["Start Date"];
+        row.appendChild(start_date);
+
+        let end_date = document.createElement("td");
+        end_date.innerHTML = record["End Date"];
+        row.appendChild(end_date);
+
+        let freq = document.createElement("td");
+        freq.innerHTML = record["freq"];
+        row.appendChild(freq);
+
+        let action = document.createElement("td");
+        let anchor = document.createElement("a");
+        anchor.href = "/attend";
+        anchor.innerHTML =
+          "<ion-icon name='terminal-outline'></ion-icon> View More";
+        action.appendChild(anchor);
+        row.appendChild(action);
+
+        total += record["freq"];
+
+        table.appendChild(row);
+      });
+      let total_row = document.createElement("tr");
+      let total_cell = document.createElement("td");
+      total_cell.style.textAlign = "right";
+      total_cell.innerHTML = "Total: " + total + " Participant(s)";
+      total_cell.colSpan = 6;
+      total_row.appendChild(total_cell);
+      table.appendChild(total_row);
+    }
+  </script>
+</html>
