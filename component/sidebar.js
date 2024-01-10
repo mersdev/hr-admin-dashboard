@@ -38,7 +38,7 @@ class Sidebar extends HTMLElement {
         </li>
         <li>
           <a
-            href="/event"
+            href="https://mersdev.github.io/hr-admin-dashboard/event"
             class="nav-link link-dark d-flex aligns-item-center mb-2 side-event"
           >
             <ion-icon name="calendar-outline" class="fs-4 me-2"></ion-icon
@@ -47,7 +47,7 @@ class Sidebar extends HTMLElement {
         </li>
         <li>
           <a
-            href="/employee"
+            href="https://mersdev.github.io/hr-admin-dashboard/employee"
             class="nav-link link-dark d-flex aligns-item-center mb-2 side-employee"
           >
             <ion-icon name="people-outline" class="fs-4 me-2"></ion-icon>
