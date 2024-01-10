@@ -7,7 +7,7 @@ window.onload = () => {
   let eventId = searchParams.get("event-id");
 
   if (eventId === null) {
-    window.location = "https://mersdev.github.io/hr-admin-dashboard/event";
+    window.location = "hr-admin-dashboard/event";
   }
 
   if (retrievedObject === null) {
