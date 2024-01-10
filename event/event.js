@@ -125,7 +125,7 @@ function createTable(data) {
 
     let action = document.createElement("td");
     let anchor = document.createElement("a");
-    anchor.href = "/view/index.html?event-id=" + record["File Code"];
+    anchor.href = "hr-admin-dashboard/view/index.html?event-id=" + record["File Code"];
     anchor.innerHTML = "<ion-icon name='terminal-outline'></ion-icon> View";
     anchor.style.textDecoration = "none";
     anchor.style.color = "#2e2e2e";
